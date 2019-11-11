@@ -1,28 +1,43 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <b-container class="bv-example-row">
+      <b-row>
+        <b-col>
+          <b-tabs content-class="mt-3" fill>
+            <b-tab title="First" active>
+              <employee @setEmployeeSalary="setEmployeeSalary"></employee>
+            </b-tab>
+            <b-tab title="First">
+              <p>I'm the first tab</p>
+            </b-tab>
+          </b-tabs>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { required, minLength } from "vuelidate/lib/validators";
+import Employee from "./components/Employee";
 
 export default {
-  name: 'app',
   components: {
-    HelloWorld
+    Employee
+  },
+  data() {
+    return {
+      employeeSalary: null,
+      employerSalary: null
+    };
+  },
+  methods: {
+    setEmployeeSalary(salary) {
+      this.employeeSalary = salary;
+    },
+    setEmployerSalary(salary) {
+      this.employerSalary = salary;
+    }
   }
-}
+};
 </script>
-
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
