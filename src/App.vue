@@ -5,18 +5,18 @@
 
     <b-container>
       <b-row>
-        <b-col>
-          <b-tabs content-class="mt-3" fill>
+        <b-col class="mt-5">
+          <b-tabs content-class="mt-5 ml-5 mr-5" fill>
             <b-tab title="First" active>
               <employee
                 @setEmployeeSalary="setEmployeeSalary"
-                :employeeSalary="salaries.employeeSalary"
+                :salaries="salaries"
               ></employee>
             </b-tab>
             <b-tab title="First">
               <employer
                 @setEmployerSalary="setEmployerSalary"
-                :employerSalary="salaries.employerSalary"
+                :salaries="salaries"
               ></employer>
             </b-tab>
           </b-tabs>

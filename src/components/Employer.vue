@@ -11,8 +11,8 @@
         ></b-form-input>
         <b-form-invalid-feedback>This is a required field and must be a Number.</b-form-invalid-feedback>
       </b-form-group>
-      <b-button type="submit" variant="primary" :disabled="$v.form.$invalid">
-        <b-spinner v-show="form.employerSalary" small type="grow"></b-spinner> 
+      <b-button type="submit" variant="primary" :disabled="$v.form.$invalid||loadingCheck()">
+        <b-spinner v-if="loadingCheck()" small type="grow"></b-spinner>
         {{btnText}}
       </b-button>
     </b-form>
@@ -24,9 +24,10 @@
 import { required, minLength, numeric } from "vuelidate/lib/validators";
 
 export default {
-  props: ["employerSalary"],
+  props: ["salaries"],
   data() {
     return {
+      spinner: false,
       state() {
         //If is dirty or touched then show error --------------
         if (this.$v.form.employerSalary.$dirty) {
@@ -34,10 +35,9 @@ export default {
         } else {
           return null;
         }
-			},
-			btnText:"Submit",
+      },
       form: {
-        employerSalary: this.employerSalary
+        employerSalary: this.salaries.employerSalary
       }
     };
   },
@@ -55,10 +55,29 @@ export default {
       this.$v.form.$touch();
       if (this.$v.form.$anyError) {
         return;
-			}
-			this.btnText = "Waiting for Employer ..."
+      }
+      this.btnText = "Waiting for Employer ...";
       //Set the Employer budget in App --------------------------
       this.$emit("setEmployerSalary", this.form.employerSalary);
+    },
+    loadingCheck() {
+      if (!this.salaries.employeeSalary && this.salaries.employerSalary) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  },
+  computed: {
+    btnText: {
+      get() {
+        if (this.loadingCheck()) {
+          return "Waiting For Employee ...";
+        } else {
+          return "Submit";
+        }
+      },
+      set() {}
     }
   }
 };
