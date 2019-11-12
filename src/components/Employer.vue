@@ -11,7 +11,10 @@
         ></b-form-input>
         <b-form-invalid-feedback>This is a required field and must be a Number.</b-form-invalid-feedback>
       </b-form-group>
-      <b-button type="submit" variant="primary" :disabled="$v.form.$invalid">Submit</b-button>
+      <b-button type="submit" variant="primary" :disabled="$v.form.$invalid">
+        <b-spinner v-show="form.employerSalary" small type="grow"></b-spinner> 
+        {{btnText}}
+      </b-button>
     </b-form>
     <!-- Employer Form  -->
   </div>
@@ -31,7 +34,8 @@ export default {
         } else {
           return null;
         }
-      },
+			},
+			btnText:"Submit",
       form: {
         employerSalary: this.employerSalary
       }
@@ -51,7 +55,8 @@ export default {
       this.$v.form.$touch();
       if (this.$v.form.$anyError) {
         return;
-      }
+			}
+			this.btnText = "Waiting for Employer ..."
       //Set the Employer budget in App --------------------------
       this.$emit("setEmployerSalary", this.form.employerSalary);
     }
