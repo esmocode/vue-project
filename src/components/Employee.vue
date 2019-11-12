@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { required, minLength } from "vuelidate/lib/validators";
+import { required, minLength,numeric } from "vuelidate/lib/validators";
 
 export default {
   data() {
@@ -40,15 +40,15 @@ export default {
   validations: {
     form: {
       employeeSalary: {
-        required,
-        minLength: minLength(3)
+				required,
+				numeric
       }
     }
   },
   methods: {
     onSubmit() {
-			this.$emit("setEmployeeSalary",this.form.employeeSalary);
       this.$v.form.$touch();
+			this.$emit("setEmployeeSalary",this.form.employeeSalary);
       if (this.$v.form.$anyError) {
         return;
       }
