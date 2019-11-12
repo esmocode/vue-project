@@ -6,24 +6,23 @@
     <b-container>
       <b-row>
         <b-col class="mt-5">
-          <b-tabs content-class="mt-5 ml-5 mr-5" fill>
-            <b-tab title="First" active>
-              <employee
-                @setEmployeeSalary="setEmployeeSalary"
-                :salaries="salaries"
-              ></employee>
-            </b-tab>
-            <b-tab title="First">
-              <employer
-                @setEmployerSalary="setEmployerSalary"
-                :salaries="salaries"
-              ></employer>
-            </b-tab>
-          </b-tabs>
+          <div class="tab-container">
+            <b-tabs fill>
+              <b-tab title="Employee Tab" active>
+                <!-- Employee Tab -->
+                <employee @setEmployeeSalary="setEmployeeSalary" :salaries="salaries"></employee>
+              </b-tab>
+              <b-tab title="Employer Tab">
+                <!-- Employer Tab -->
+                <employer @setEmployerSalary="setEmployerSalary" :salaries="salaries"></employer>
+              </b-tab>
+            </b-tabs>
+          </div>
         </b-col>
       </b-row>
     </b-container>
 
+    <!-- Modal -->
     <modal :success="success"></modal>
   </div>
 </template>
@@ -77,9 +76,33 @@ export default {
 };
 </script>
 
-<style>
+<style >
 @import url("https://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700&display=swap");
 body {
   font-family: "Quicksand", sans-serif !important;
+  background-color: #f4f4f4 !important;
+}
+.tab-content {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-top: 0;
+}
+.tab-pane {
+  max-width: 500px;
+  padding: 40px 20px;
+  margin: 0 auto;
+}
+.nav-tabs {
+  border: none;
+}
+.nav-tabs .nav-link,
+.nav-tabs .nav-link {
+  border-color: #e9ecef #e9ecef transparent !important;
+}
+.nav-tabs .nav-link {
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  font-weight: 600;
+  border-bottom: none;
 }
 </style>

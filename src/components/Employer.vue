@@ -6,6 +6,7 @@
         <b-form-input
           id="employer-budget"
           name="employer-budget"
+					:disabled="loadingCheck()&&editable"
           v-model.lazy="$v.form.employerSalary.$model"
           :state="state()"
         ></b-form-input>
@@ -27,6 +28,7 @@ export default {
   props: ["salaries"],
   data() {
     return {
+			editable:true,
       spinner: false,
       state() {
         //If is dirty or touched then show error --------------
