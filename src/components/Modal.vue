@@ -10,25 +10,25 @@
       <span class="icon red">
         <faicon icon="frown-open" />
       </span>
-      Sorry!
+      Failed!
     </div>
   </b-modal>
 </template>
 
 <script>
 export default {
-  name: "modal",
-  props: ["success"],
+  name: 'modal',
+  props: ['success'],
   computed: {
-    title() {
+    title () {
       if (this.success) {
-        return "Congrats!";
+        return 'Congrats!'
       } else {
-        return "Sorry!";
+        return 'Sorry!'
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -39,7 +39,7 @@ export default {
 .green {
   color: #4caf50;
 }
-.red{
-	color:#c73f3f
+.red {
+  color: #c73f3f;
 }
 </style>

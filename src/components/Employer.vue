@@ -5,8 +5,7 @@
       <b-form-group label="Your Hiring Budget" label-for="employer-budget">
         <b-form-input
           id="employer-budget"
-          name="employer-budget"
-					:disabled="loadingCheck()&&editable"
+          name="employer-budget" :disabled="loadingCheck()&&editable"
           v-model.lazy="$v.form.employerSalary.$model"
           :state="state()"
         ></b-form-input>
@@ -22,26 +21,26 @@
 </template>
 
 <script>
-import { required, minLength, numeric } from "vuelidate/lib/validators";
+import { required, numeric } from 'vuelidate/lib/validators'
 
 export default {
-  props: ["salaries"],
-  data() {
+  props: ['salaries'],
+  data () {
     return {
-			editable:true,
+      editable: true,
       spinner: false,
-      state() {
-        //If is dirty or touched then show error --------------
+      state () {
+        // If is dirty or touched then show error --------------
         if (this.$v.form.employerSalary.$dirty) {
-          return !this.$v.form.employerSalary.$error;
+          return !this.$v.form.employerSalary.$error
         } else {
-          return null;
+          return null
         }
       },
       form: {
         employerSalary: this.salaries.employerSalary
       }
-    };
+    }
   },
   validations: {
     form: {
@@ -52,35 +51,35 @@ export default {
     }
   },
   methods: {
-    onSubmit() {
-      //Do not submit if there's any error ----------------------
-      this.$v.form.$touch();
+    onSubmit () {
+      // Do not submit if there's any error ----------------------
+      this.$v.form.$touch()
       if (this.$v.form.$anyError) {
-        return;
+        return
       }
-      this.btnText = "Waiting for Employer ...";
-      //Set the Employer budget in App --------------------------
-      this.$emit("setEmployerSalary", this.form.employerSalary);
+      this.btnText = 'Waiting for Employer ...'
+      // Set the Employer budget in App --------------------------
+      this.$emit('setEmployerSalary', this.form.employerSalary)
     },
-    loadingCheck() {
+    loadingCheck () {
       if (!this.salaries.employeeSalary && this.salaries.employerSalary) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     }
   },
   computed: {
     btnText: {
-      get() {
+      get () {
         if (this.loadingCheck()) {
-          return "Waiting For Employee ...";
+          return 'Waiting For Employee ...'
         } else {
-          return "Submit";
+          return 'Submit'
         }
       },
-      set() {}
+      set () {}
     }
   }
-};
+}
 </script>
