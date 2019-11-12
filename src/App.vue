@@ -1,15 +1,17 @@
 <template>
   <div>
-    <div v-if="salaries.employeeSalary&&salaries.employerSalary">woohooo we have both</div>
-    <b-container class="bv-example-row">
+		<!-- Application Header -->
+		<site-header></site-header>
+
+    <b-container>
       <b-row>
         <b-col>
           <b-tabs content-class="mt-3" fill>
             <b-tab title="First" active>
-              <employee @setEmployeeSalary="setEmployeeSalary"></employee>
+              <employee @setEmployeeSalary="setEmployeeSalary" :employeeSalary="salaries.employeeSalary"></employee>
             </b-tab>
             <b-tab title="First">
-              <employer @setEmployerSalary="setEmployerSalary"></employer>
+              <employer @setEmployerSalary="setEmployerSalary" :employerSalary="salaries.employerSalary"></employer>
             </b-tab>
           </b-tabs>
         </b-col>
@@ -26,14 +28,15 @@
 </template>
 
 <script>
-import { required, minLength } from "vuelidate/lib/validators";
 import Employee from "./components/Employee";
 import Employer from "./components/Employer";
+import SiteHeader from "./components/SiteHeader"
 
 export default {
   components: {
     Employee,
-    Employer
+		Employer,
+		SiteHeader
   },
   data() {
     return {
@@ -53,8 +56,12 @@ export default {
       this.salaries.employerSalary = salary;
       console.log(this.salaries);
     }
-  },
+	},
+	watch: {
+
+	},
   updated() {
+		console.log("updated",this.salaries);
     if (this.salaries.employeeSalary && this.salaries.employerSalary) {
 			this.$bvModal.show("modal-1");
     }
