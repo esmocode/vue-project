@@ -1,4 +1,8 @@
-# sender
+# Sender Vue Project
+
+
+Hi i am Mohammad Eslami and this was a test project, Unfortunately i didn't get the time to finish the e2e testing but some unit testings has been done. If e2e is required just notify me and i can build the tests and update this repo.
+Thanks
 
 ## Project setup
 ```
